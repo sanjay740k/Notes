@@ -1,11 +1,11 @@
 Screen #1: The launch screen
 
-![Screen1](https://user-images.githubusercontent.com/68817302/108341939-38983e00-7200-11eb-9860-1e777c6b7775.jpg)
+![Screen1 (2)](https://user-images.githubusercontent.com/68817302/108348224-82385700-7207-11eb-98ea-1a0b21733f8f.jpg)
 
 Screen #2: The Add note screen
 
-![Screen2](https://user-images.githubusercontent.com/68817302/108342150-7a28e900-7200-11eb-808b-262f9482c9e6.jpg)
+![Screen2 (1)](https://user-images.githubusercontent.com/68817302/108348336-adbb4180-7207-11eb-9788-f687b73d8b73.jpg)
 
 Screen #3: The note detail screen
 
-![Screen3](https://user-images.githubusercontent.com/68817302/108342195-8745d800-7200-11eb-8509-568eae61d9e9.jpg)
+![Screen3 (1)](https://user-images.githubusercontent.com/68817302/108348460-d2171e00-7207-11eb-92d5-8b4e89bedfe1.jpg)
