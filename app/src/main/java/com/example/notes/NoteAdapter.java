@@ -1,8 +1,12 @@
 package com.example.notes;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +31,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ListViewHolder
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.note_adapter, null);
+        @SuppressLint("InflateParams") View view = inflater.inflate(R.layout.note_adapter, null);
         return new ListViewHolder(view);
     }
 
@@ -38,6 +42,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ListViewHolder
         holder.description.setText(note.getDescription());
         holder.date.setText(note.getDate());
         holder.time.setText(note.getTime());
+        holder.image = note.getImage();
 
         holder.setListener(note.getId());
     }
@@ -51,6 +56,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ListViewHolder
         TextView title, description, time, date;
         public ImageView deleteItem;
         int position;
+        public String image;
 
         public ListViewHolder(View itemView) {
             super(itemView);
@@ -62,9 +68,11 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ListViewHolder
             deleteItem = itemView.findViewById(R.id.deleteButoon);
 
             itemView.setOnClickListener(v -> {
+
                 Intent intent = new Intent(context, ShowNoteActivity.class);
                 intent.putExtra("title", title.getText().toString());
                 intent.putExtra("desc", description.getText().toString());
+                intent.putExtra("image", image);
                 context.startActivity(intent);
             });
         }
@@ -83,5 +91,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ListViewHolder
 
         notes.remove(position);
         notifyItemRemoved(position);
+    }
+
+    public static Bitmap decodeBase64(String input) {
+        byte[] decodedByte = Base64.decode(input, 0);
+        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 }

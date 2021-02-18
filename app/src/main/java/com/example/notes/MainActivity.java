@@ -8,9 +8,14 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private List<Note> currnotes;
     public RecyclerView recyclerView;
     SharedPreferences.Editor editor;
-    String title, description, noteDate, noteTime;
+    String title, description, noteDate, noteTime, noteImage = "";
+    boolean flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +56,20 @@ public class MainActivity extends AppCompatActivity {
         if (extras != null) {
             CurrentDateandTime();
             title = extras.getString("title");
-            description = (extras.getString("desc"));
+            description = extras.getString("desc");
+            flag = extras.getBoolean("flag");
+            if(flag)
+            noteImage = extras.getString("image");
             String uniqueID = UUID.randomUUID().toString();
-            Set<String> hash_Set = new HashSet<String>();
+            Set<String> hash_Set = new HashSet<>();
 
             hash_Set.add("a"+title);
             hash_Set.add("b"+description);
             hash_Set.add("c"+noteDate);
             hash_Set.add("d"+noteTime);
+            if(flag){
+                hash_Set.add("e"+noteImage);
+            }
             editor.putStringSet(uniqueID, hash_Set);
             editor.apply();
         }
@@ -65,15 +77,17 @@ public class MainActivity extends AppCompatActivity {
         Map<String, ?> prefsMap = sharedPreferences.getAll();
         for (Map.Entry<String, ?> entry: prefsMap.entrySet()) {
             String  uniqueID = entry.getKey();
-            Set<String> hash_Set = sharedPreferences.getStringSet(uniqueID, new HashSet<String>());
+            Set<String> hash_Set = sharedPreferences.getStringSet(uniqueID, new HashSet<>());
 
             for (String s : hash_Set) {
                 if(s.charAt(0)=='a')title = s.substring(1);
                 else if(s.charAt(0)=='b')description = s.substring(1);
                 else if(s.charAt(0)=='c')noteDate = s.substring(1);
                 else if(s.charAt(0)=='d')noteTime = s.substring(1);
+                else if(s.charAt(0)=='e')noteImage = s.substring(1);
             }
-            currnotes.add(new Note(uniqueID, title, description, noteDate, noteTime));
+
+            currnotes.add(new Note(uniqueID, title, description, noteDate, noteTime, noteImage));
         }
     }
 
