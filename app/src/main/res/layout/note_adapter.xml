@@ -26,6 +26,8 @@
                 android:layout_marginStart="5dp"
                 android:layout_toStartOf="@+id/deleteButoon"
                 android:text="@string/title"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
@@ -46,7 +48,10 @@
                 android:layout_below="@id/textViewTitle"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
+                android:textSize="12sp"
                 android:text="@string/description"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textColor="@color/white"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
