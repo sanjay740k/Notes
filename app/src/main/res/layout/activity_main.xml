@@ -11,9 +11,10 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="16dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        android:nestedScrollingEnabled="true">
+        android:nestedScrollingEnabled="true"
+        tools:ignore="UnusedAttribute">
 
     </androidx.recyclerview.widget.RecyclerView>
 

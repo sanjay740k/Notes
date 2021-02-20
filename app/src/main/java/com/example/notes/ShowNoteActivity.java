@@ -30,6 +30,7 @@ public class ShowNoteActivity extends AppCompatActivity {
             image = extras.getString("image");
             if(!image.isEmpty()){
                 imageView.setImageBitmap(decodeBase64(image));
+                imageView.getLayoutParams().height = 1000;
             }
         }
     }

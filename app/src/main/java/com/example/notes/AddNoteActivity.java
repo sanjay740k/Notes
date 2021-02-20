@@ -34,10 +34,9 @@ import java.util.UUID;
 public class AddNoteActivity extends AppCompatActivity {
 
     private EditText title, description;
-    private TextView chooseImage;
     String noteTitle, noteDesc;
     private ImageView imgView;
-    private static int RESULT_LOAD_IMAGE = 1;
+    private static final int RESULT_LOAD_IMAGE = 1;
     Bitmap bitmap;
     boolean flag = false;
 
@@ -48,9 +47,9 @@ public class AddNoteActivity extends AppCompatActivity {
 
         title = findViewById(R.id.noteTitle);
         description = findViewById(R.id.noteDescription);
-        chooseImage = findViewById(R.id.noteImage);
+        TextView chooseImage = findViewById(R.id.noteImage);
         imgView = findViewById(R.id.simage);
-        Button saveInfo = findViewById(R.id.save);
+        TextView saveInfo = findViewById(R.id.save);
 
         chooseImage.setOnClickListener(v -> {
             Intent gallery = new Intent(Intent.ACTION_GET_CONTENT);
@@ -71,10 +70,11 @@ public class AddNoteActivity extends AppCompatActivity {
             imgView.setImageURI(imageUri);
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-                Log.i("data", bitmap.toString());
-            } catch (IOException e) {
+            }
+            catch (IOException e) {
                 e.printStackTrace();
             }
+            imgView.getLayoutParams().height = 1000;
         }
     }
 
@@ -103,7 +103,7 @@ public class AddNoteActivity extends AppCompatActivity {
 
     public static String encodeTobase64(Bitmap image) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        image.compress(Bitmap.CompressFormat.JPEG, 10, baos);
         byte[] b = baos.toByteArray();
         return Base64.encodeToString(b, Base64.DEFAULT);
     }
